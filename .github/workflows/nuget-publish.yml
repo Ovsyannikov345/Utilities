@@ -23,16 +23,16 @@ jobs:
         dotnet-version: '10.0.x'
 
     - name: Restore dependencies
-      run: dotnet restore Utilities.slnx
+      run: dotnet restore Utilities/Utilities.slnx
 
     - name: Build solution
-      run: dotnet build Utilities.slnx --configuration Release --no-restore
+      run: dotnet build Utilities/Utilities.slnx --configuration Release --no-restore
 
     - name: Run all tests
-      run: dotnet test Utilities.slnx --configuration Release --no-build --verbosity normal
+      run: dotnet test Utilities/Utilities.slnx --configuration Release --no-build --verbosity normal
 
     - name: Pack NuGet packages
-      run: dotnet pack Utilities.slnx --configuration Release --no-build --output ./nupkg
+      run: dotnet pack Utilities/Utilities.slnx --configuration Release --no-build --output ./nupkg
 
     - name: NuGet login (OIDC → temp API key)
       uses: NuGet/login@v1
