@@ -1,0 +1,44 @@
+name: Publish Utility Libraries
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-test-publish:
+    permissions:
+      id-token: write
+      contents: read
+  
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET 10
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore Utilities.slnx
+
+    - name: Build solution
+      run: dotnet build Utilities.slnx --configuration Release --no-restore
+
+    - name: Run all tests
+      run: dotnet test Utilities.slnx --configuration Release --no-build --verbosity normal
+
+    - name: Pack NuGet packages
+      run: dotnet pack Utilities.slnx --configuration Release --no-build --output ./nupkg
+
+    - name: NuGet login (OIDC → temp API key)
+      uses: NuGet/login@v1
+      id: login
+      with:
+        user: ${{ secrets.NUGET_USER }}
+
+    - name: NuGet push
+      run: dotnet nuget push ./nupkg/*.nupkg --api-key ${{steps.login.outputs.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json --skip-duplicate
