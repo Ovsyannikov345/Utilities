@@ -4,10 +4,14 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <PackageId>iausiannikau-utilities-result</PackageId>
+    <PackageId>Ausiannikau.Utilities.Result</PackageId>
 	<Version>1.0.0</Version>
     <Title>Result</Title>
     <Description>Small library that offers classes for implementing result pattern</Description>
+    <Authors>Ilya_Ausiannikau</Authors>
+    <RepositoryUrl>https://github.com/Ovsyannikov345/Utilities</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>result;pattern;error-handling</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
