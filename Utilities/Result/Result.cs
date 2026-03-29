@@ -1,4 +1,4 @@
-﻿namespace Result;
+﻿namespace Utilities;
 
 public record Result
 {

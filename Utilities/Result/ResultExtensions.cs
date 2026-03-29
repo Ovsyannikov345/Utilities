@@ -1,4 +1,4 @@
-﻿namespace Result;
+﻿namespace Utilities;
 
 public static class ResultExtensions
 {
