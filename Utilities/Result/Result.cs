@@ -45,4 +45,6 @@ public record Result<T> : Result
     public static Result<T> Succeed(T value) => new(true, null, value);
 
     public static new Result<T> Fail(string errorMessage) => new(false, errorMessage, default);
+
+    public static implicit operator Result<T>(T value) => Succeed(value);
 }

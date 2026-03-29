@@ -75,4 +75,15 @@ public sealed class ResultTTests
         action.Should().Throw<ArgumentException>()
             .WithMessage("*A failed result must have an error message.*");
     }
+
+    [Fact]
+    public void ImplicitCast_WhenPerformed_ReturnsSuccessfulResult()
+    {
+        // Act.
+        Result<int> result = 1;
+
+        // Assert.
+        result.IsSuccess.Should().BeTrue();
+        result.Value.Should().Be(1);
+    }
 }
