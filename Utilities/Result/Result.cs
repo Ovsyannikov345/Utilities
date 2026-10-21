@@ -1,4 +1,7 @@
-﻿namespace Result;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+
+namespace Result;
 
 public record Result
 {
@@ -45,4 +48,18 @@ public record Result<T> : Result
     public static Result<T> Succeed(T value) => new(true, null, value);
 
     public static new Result<T> Fail(string errorMessage) => new(false, errorMessage, default);
+
+    public bool TryGetSuccessValue([MaybeNullWhen(false)] out T value)
+    {
+        if (IsSuccess)
+        {
+            value = _value!;
+
+            return true;
+        }
+
+        value = default;
+
+        return false;
+    }
 }
