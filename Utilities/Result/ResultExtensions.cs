@@ -1,4 +1,4 @@
-﻿namespace Result;
+﻿namespace Ausiannikau.Utilities.Results;
 
 public static class ResultExtensions
 {

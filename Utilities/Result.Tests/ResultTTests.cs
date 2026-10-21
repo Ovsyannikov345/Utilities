@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 
-namespace Result.Tests;
+namespace Ausiannikau.Utilities.Results.Tests;
 
 public sealed class ResultTTests
 {
@@ -118,5 +118,35 @@ public sealed class ResultTTests
         // Assert.
         isSuccess.Should().BeTrue();
         actualValue.Should().BeNull();
+    }
+
+    [Fact]
+    public void ImplicitOperator_WhenConvertedFromValue_ReturnsSuccessfulResultWithValue()
+    {
+        // Arrange.
+        var expectedValue = 42;
+
+        // Act.
+        Result<int> result = expectedValue;
+
+        // Assert.
+        result.IsSuccess.Should().BeTrue();
+        result.IsFailure.Should().BeFalse();
+        result.Value.Should().Be(expectedValue);
+    }
+
+    [Fact]
+    public void ImplicitOperator_WhenConvertedFromNull_ReturnsSuccessfulResultWithNullValue()
+    {
+        // Arrange.
+        string? expectedValue = null;
+
+        // Act.
+        Result<string?> result = expectedValue;
+
+        // Assert.
+        result.IsSuccess.Should().BeTrue();
+        result.IsFailure.Should().BeFalse();
+        result.Value.Should().BeNull();
     }
 }

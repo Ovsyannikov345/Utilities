@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 
-namespace Result.Tests;
+namespace Ausiannikau.Utilities.Results.Tests;
 
 public sealed class ResultExtensionsTests
 {

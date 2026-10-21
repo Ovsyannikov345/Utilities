@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using System.Runtime.CompilerServices;
 
-namespace Result;
+namespace Ausiannikau.Utilities.Results;
 
 public record Result
 {
@@ -46,6 +45,8 @@ public record Result<T> : Result
     }
 
     public static Result<T> Succeed(T value) => new(true, null, value);
+
+    public static implicit operator Result<T>(T value) => Succeed(value);
 
     public static new Result<T> Fail(string errorMessage) => new(false, errorMessage, default);
 

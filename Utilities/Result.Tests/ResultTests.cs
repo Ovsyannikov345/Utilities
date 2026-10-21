@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
+using Ausiannikau.Utilities.Results;
 
-namespace Result.Tests;
+namespace Ausiannikau.Utilities.Results.Tests;
 
 public class ResultTests
 {
