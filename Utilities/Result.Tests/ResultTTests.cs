@@ -75,4 +75,48 @@ public sealed class ResultTTests
         action.Should().Throw<ArgumentException>()
             .WithMessage("*A failed result must have an error message.*");
     }
+
+    [Fact]
+    public void TryGetSuccessValue_WhenResultIsSuccess_ReturnsTrueAndAssignsValue()
+    {
+        // Arrange.
+        var expectedValue = "Success data";
+        var result = Result<string>.Succeed(expectedValue);
+
+        // Act.
+        var isSuccess = result.TryGetSuccessValue(out var actualValue);
+
+        // Assert.
+        isSuccess.Should().BeTrue();
+        actualValue.Should().Be(expectedValue);
+    }
+
+    [Fact]
+    public void TryGetSuccessValue_WhenResultIsFailure_ReturnsFalseAndAssignsDefault()
+    {
+        // Arrange.
+        var result = Result<int>.Fail("An error occurred.");
+
+        // Act.
+        var isSuccess = result.TryGetSuccessValue(out var actualValue);
+
+        // Assert.
+        isSuccess.Should().BeFalse();
+        actualValue.Should().Be(default);
+    }
+
+    [Fact]
+    public void TryGetSuccessValue_WhenResultIsSuccessWithNullValue_ReturnsTrueAndAssignsNull()
+    {
+        // Arrange.
+        int? expectedValue = null;
+        var result = Result<int?>.Succeed(expectedValue);
+
+        // Act.
+        var isSuccess = result.TryGetSuccessValue(out var actualValue);
+
+        // Assert.
+        isSuccess.Should().BeTrue();
+        actualValue.Should().BeNull();
+    }
 }
